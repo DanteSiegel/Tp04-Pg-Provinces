@@ -31,7 +31,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/province/{id}",
+					"raw": "http://localhost:3000/api/province/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -40,7 +40,7 @@
 					"path": [
 						"api",
 						"province",
-						"{id}"
+						"2"
 					]
 				}
 			},
