@@ -9,7 +9,14 @@
 			"name": "province - GetAll",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "/api/province",
+					"path": [
+						"api",
+						"province"
+					]
+				}
 			},
 			"response": []
 		},
@@ -17,7 +24,15 @@
 			"name": "province - GetById",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "/api/province/{id}",
+					"path": [
+						"api",
+						"province",
+						"{id}"
+					]
+				}
 			},
 			"response": []
 		},
@@ -25,7 +40,14 @@
 			"name": "province - Create",
 			"request": {
 				"method": "POST",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "/api/province",
+					"path": [
+						"api",
+						"province"
+					]
+				}
 			},
 			"response": []
 		},
@@ -33,7 +55,14 @@
 			"name": "province - Update",
 			"request": {
 				"method": "PUT",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "/api/province",
+					"path": [
+						"api",
+						"province"
+					]
+				}
 			},
 			"response": []
 		},
