@@ -70,7 +70,15 @@
 			"name": "province - DeleteById",
 			"request": {
 				"method": "DELETE",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "/api/province/{id}",
+					"path": [
+						"api",
+						"province",
+						"{id}"
+					]
+				}
 			},
 			"response": []
 		}
