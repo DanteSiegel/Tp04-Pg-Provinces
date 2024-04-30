@@ -1,17 +1,11 @@
-import express from 'express';
-import provinces from '../entities/province.js';
-
-const ProvinceRouter = express.Router();
-
-// Endpoint para obtener todas las provincias
-ProvinceRouter.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json(provinces);
 });
 
-// Endpoint para obtener una provincia por su id
-ProvinceRouter.get("/:id", (req, res) => {
+// GET /api/province/{id}
+router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const province = provinces.find(province => province.id === id);
+  const province = provinces.find((p) => p.id === id);
   if (province) {
     res.status(200).json(province);
   } else {
@@ -19,35 +13,40 @@ ProvinceRouter.get("/:id", (req, res) => {
   }
 });
 
-// Endpoint para insertar una nueva provincia
-ProvinceRouter.post("/", (req, res) => {
-  const { name, full_name, latitude, longitude, display_order } = req.body;
-
-  // Verificar si todos los campos necesarios están presentes
-  if (!name || !full_name || !latitude || !longitude || !display_order) {
-    return res.status(400).send("Faltan campos obligatorios");
+// POST /api/province
+router.post("/", (req, res) => {
+  const { name, fullName, latitude, longitude, displayOrder } = req.body;
+  // Aquí puedes realizar validaciones antes de insertar la provincia
+  if (!name || name.length < 3) {
+    return res.status(400).send("Nombre de provincia inválido");
   }
-
-  // Verificar si el nombre tiene al menos 3 caracteres
-  if (name.length < 3) {
-    return res.status(400).send("El nombre debe tener al menos 3 caracteres");
-  }
-
-  // Crear la nueva provincia
-  const newProvince = {
-    id: provinces.length + 1,
-    name,
-    full_name,
-    latitude,
-    longitude,
-    display_order
-  };
-
-  // Agregar la nueva provincia al array de provincias
+  const newProvince = { id: provinces.length + 1, name, fullName, latitude, longitude, displayOrder };
   provinces.push(newProvince);
-
-  // Retornar el estado 201 (Created) y la provincia creada
-  res.status(201).json(newProvince);
+  res.status(201).send("Provincia creada correctamente");
 });
 
-export default ProvinceRouter;
+// PUT /api/province
+router.put("/", (req, res) => {
+  const { id, name, fullName, latitude, longitude, displayOrder } = req.body;
+  const index = provinces.findIndex((p) => p.id === id);
+  if (index !== -1) {
+    provinces[index] = { id, name, fullName, latitude, longitude, displayOrder };
+    res.status(200).send("Provincia modificada correctamente");
+  } else {
+    res.status(404).send("Provincia no encontrada");
+  }
+});
+
+// DELETE /api/province/{id}
+router.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = provinces.findIndex((p) => p.id === id);
+  if (index !== -1) {
+    provinces.splice(index, 1);
+    res.status(200).send("Provincia eliminada correctamente");
+  } else {
+    res.status(404).send("Provincia no encontrada");
+  }
+});
+
+export default router;
